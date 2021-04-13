@@ -41,7 +41,12 @@ header {
   padding: 1px;
 }
 
-.todos > div {
+.todos .task-container {
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.todos .task-container > div {
   overflow-wrap: break-word;
   -webkit-hyphens: auto;
       -ms-hyphens: auto;
@@ -49,7 +54,7 @@ header {
   font-size: 1.15em;
 }
 
-.todos .task {
+.todos .task-container .task {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,12 +69,12 @@ header {
       align-content: center;
 }
 
-.todos .task li {
+.todos .task-container .task li {
   padding: 10px;
   width: calc(100% - 50px);
 }
 
-.todos .task button {
+.todos .task-container .task button {
   width: 30px;
   height: 30px;
   color: #f2f2f2;
@@ -80,7 +85,7 @@ header {
   background-color: rgba(155, 149, 149, 0);
 }
 
-.todos > div:hover {
+.todos .task-container > div:hover {
   background-color: rgba(12, 12, 12, 0.8);
   -webkit-user-select: none;
      -moz-user-select: none;

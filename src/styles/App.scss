@@ -42,38 +42,43 @@ header {
     margin-top: 20px;
     padding: 1px;
 
-    > div {
-        overflow-wrap: break-word;
-        hyphens: auto;
-        font-size: 1.15em;
-    }
+    .task-container {
+        max-height: 50vh;
+        overflow: scroll;
 
-    .task {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-content: center;
-
-        li {
-            padding: 10px;
-            width: calc(100% - 50px);
+        > div {
+            overflow-wrap: break-word;
+            hyphens: auto;
+            font-size: 1.15em;
         }
-        
-        button {
-            width: 30px;
-            height: 30px;
-            color: $white;
-            margin-top: auto;
-            margin-bottom: auto;
-            margin-right: 10px;
-            border: 1px solid $white;
-            background-color: rgba(155, 149, 149, 0);
-        }
-    }
 
-    > div:hover {
-        background-color: rgba($black, 0.8);
-        user-select: none;
+        .task {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-content: center;
+
+            li {
+                padding: 10px;
+                width: calc(100% - 50px);
+            }
+            
+            button {
+                width: 30px;
+                height: 30px;
+                color: $white;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-right: 10px;
+                border: 1px solid $white;
+                background-color: rgba(155, 149, 149, 0);
+            }
+        }
+
+        > div:hover {
+            background-color: rgba($black, 0.8);
+            user-select: none;
+        }
     }
 
     .info {

@@ -96,20 +96,22 @@ export default class Todos extends Component {
                     <button className='btn btn-light' onClick={() => this.modifyEveryThing(true)}>Check Everything</button>
                     <button className='btn btn-light' onClick={() => this.modifyEveryThing(false)}>Uncheck Everything</button>
                 </form>
-                {
-                    this.state.todos.map((task, i) => {
-                        this.index++;
-                        return (<Todo task={task}
-                            key={this.index}
-                            index={i}
-                            modifyCount={this.modifyCount}
-                            filterType={this.state.filterType}
-                            deleteTask={this.deleteTask}
-                            isCompleted={this.state.whichCompleted[i]}
-                            changeCompletionInParent={this.changeCompletionInParent}/>
-                        );
-                    })
-                }
+                <div className='task-container'>
+                    {
+                        this.state.todos.map((task, i) => {
+                            this.index++;
+                            return (<Todo task={task}
+                                key={this.index}
+                                index={i}
+                                modifyCount={this.modifyCount}
+                                filterType={this.state.filterType}
+                                deleteTask={this.deleteTask}
+                                isCompleted={this.state.whichCompleted[i]}
+                                changeCompletionInParent={this.changeCompletionInParent}/>
+                            );
+                        })
+                    }
+                </div>
                 {
                     (this.state.completed > 0) 
                         ? (<form className='row deleteForm' onSubmit={event => event.preventDefault()}>
