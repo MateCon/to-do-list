@@ -1,0 +1,134 @@
+$white: #f2f2f2;
+$black: #0c0c0c;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    width: 100%;
+    height: cover;
+    background-image: url('https://wallpapercave.com/wp/wp7563506.jpg');
+    background-size: cover;
+    background-position: top center;
+}
+
+header {
+    padding: 7px;
+    background-color: rgba($black, 0.8);
+    color: $white;
+    text-align: center;
+}
+
+#root, #root > div, main {
+    width: inherit;
+    height: inherit;
+}
+
+.todos {
+    background-color: rgba($black, 0.8);
+    color: $white;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 1px;
+
+    > div {
+        overflow-wrap: break-word;
+        hyphens: auto;
+        font-size: 1.15em;
+    }
+
+    .task {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+
+        li {
+            padding: 10px;
+            width: calc(100% - 50px);
+        }
+        
+        button {
+            width: 30px;
+            height: 30px;
+            color: $white;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 10px;
+            border: 1px solid $white;
+            background-color: rgba(155, 149, 149, 0);
+        }
+    }
+
+    > div:hover {
+        background-color: rgba($black, 0.8);
+        user-select: none;
+    }
+
+    .info {
+        text-align: center;
+        padding: 10px;
+        font-size: 1.3em;
+    }
+
+    form {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .filterForm {
+        border-top: 1px solid black;
+        .btn-all {
+            width: 20%;
+        }
+        .btn-active {
+            width: 30%;
+        }
+        .btn-completed {
+            width: 50%;
+        }
+    }
+
+    .checkForm {
+        border-top: 1px solid black;
+        button {
+            width: 50%;
+        }
+    }
+
+    .deleteForm {
+        border-top: 1px solid black;
+        button {
+            width: 100%;
+        }
+    }
+
+    input {
+        padding-left: 10px;
+        font-size: 1em;
+        border: 0;
+        width: 60%;
+    }
+
+    button {
+        border-radius: 0;
+        font-size: 1em;
+        width: 40%;
+    }
+}
+
+.completed {
+    font-weight: 300;
+    text-decoration: line-through;
+    color: #a9a9a9;
+}
