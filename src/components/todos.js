@@ -88,9 +88,9 @@ export default class Todos extends Component {
                     <button type='submit' className='btn btn-primary'>Add task</button>
                 </form>
                 <form className='row filterForm' onSubmit={event => event.preventDefault()}>
-                    <button className={`btn ${(this.state.filterType == 'all') ? 'btn-success' : 'btn-light'} btn-all`} onClick={() => this.changeFilterType('all')}>All</button>
-                    <button className={`btn ${(this.state.filterType == 'active') ? 'btn-success' : 'btn-light'} btn-active`} onClick={() => this.changeFilterType('active')}>Active</button>
-                    <button className={`btn ${(this.state.filterType == 'completed') ? 'btn-success' : 'btn-light'} btn-completed`} onClick={() => this.changeFilterType('completed')}>Completed</button>
+                    <button className={`btn ${(this.state.filterType === 'all') ? 'btn-success' : 'btn-light'} btn-all`} onClick={() => this.changeFilterType('all')}>All</button>
+                    <button className={`btn ${(this.state.filterType === 'active') ? 'btn-success' : 'btn-light'} btn-active`} onClick={() => this.changeFilterType('active')}>Active</button>
+                    <button className={`btn ${(this.state.filterType === 'completed') ? 'btn-success' : 'btn-light'} btn-completed`} onClick={() => this.changeFilterType('completed')}>Completed</button>
                 </form>
                 <form className='row checkForm' onSubmit={event => event.preventDefault()}>
                     <button className='btn btn-light' onClick={() => this.modifyEveryThing(true)}>Check Everything</button>
