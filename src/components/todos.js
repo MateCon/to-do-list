@@ -73,7 +73,7 @@ export default class Todos extends Component {
         this.setState({
             todos: newTodos,
             whichCompleted: newWhichCompleted,
-            completed: newTodos.length
+            completed: 0
         });
     }
 
