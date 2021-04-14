@@ -43,7 +43,7 @@ header {
 
 .todos .task-container {
   max-height: 50vh;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .todos .task-container > div {
