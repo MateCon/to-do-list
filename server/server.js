@@ -14,6 +14,32 @@ const db = mysql.createConnection({
     database: 'ToDoList'
 });
 
+app.post('/create', (req, res) => {
+    const name = req.body.name;
+    const password = req.body.password;
+
+    db.query('INSERT INTO user (name, password) VALUES (?,?)', 
+    [name, password], 
+    (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send('Values Inserted');
+        }
+    });
+});
+
+// app.get('/employees', (req, res) => {
+//     db.query('SELECT * FROM employees',
+//     (err, result) => {
+//         if(err) {
+//             console.log(err);
+//         } else {
+//             res.send(result);
+//         }
+//     })
+// });
+
 app.listen(port, () => {
     console.log(`Your server is running on port ${port}.`)
 });
