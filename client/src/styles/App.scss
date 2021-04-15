@@ -24,7 +24,15 @@ header {
     padding: 7px;
     background-color: rgba($black, 0.8);
     color: $white;
-    text-align: center;
+
+    * {
+        width: 50%;
+    }
+
+    p {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
 }
 
 #root, #root > div, main {

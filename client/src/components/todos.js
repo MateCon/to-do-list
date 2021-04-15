@@ -16,7 +16,6 @@ export default class Todos extends Component {
         this.index = 0;
     }
 
-
     addTask = event => {
         event.preventDefault();
         if(event.target[0].value === '') return ;

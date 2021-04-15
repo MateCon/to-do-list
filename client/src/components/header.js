@@ -11,9 +11,10 @@ export default class Header extends Component {
 
 	render() {
 		return (
-			<header>
-				<h1>To-do</h1>
-				<p>{this.state.name}</p>
+			<header className='row'>
+				<div className='col'></div>
+				<h1 className='col text-center'>To-do</h1>
+				<p className='col text-right'>{this.state.name}</p>
 			</header>
 		);
 	}

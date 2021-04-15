@@ -22,7 +22,15 @@ header {
   padding: 7px;
   background-color: rgba(12, 12, 12, 0.8);
   color: #f2f2f2;
-  text-align: center;
+}
+
+header * {
+  width: 50%;
+}
+
+header p {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #root, #root > div, main {
