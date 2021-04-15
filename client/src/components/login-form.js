@@ -6,6 +6,7 @@ export default function Todos() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState(0);
     const [confirmPassword, setConfirmPassword] = useState(0);
+    const [hasLoggedIn, setHasLoggedIn] = useState([]);
 
     const addUser = () => {
         if(password === confirmPassword) {
@@ -18,11 +19,25 @@ export default function Todos() {
         } else {
             console.log("passwords don't match");
         }
+    }    
+
+    const validateUser = () => {
+        Axios.post('http://localhost:3001/user', {
+            name: name,
+            password: password,
+        }).then(request => {
+            if(request.data.length === 1) {
+                console.log(`${request.data[0].name} logged in successfully.`);
+            } else {
+                console.log('The user or the password is incorrect.');
+            }
+        });
     }
     
     const login = (
         <form className='login-form' onSubmit={event => {
             event.preventDefault();
+            validateUser();
         }}>
             <h2 className='text-primary text-center'>Login</h2>
             <label>Name</label>
