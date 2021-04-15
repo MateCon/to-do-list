@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
-export default function Todos() {
+export default function Todos(props) {
     const [loginType, setLoginType] = useState('login');
     const [name, setName] = useState('');
     const [password, setPassword] = useState(0);
@@ -28,6 +28,7 @@ export default function Todos() {
         }).then(request => {
             if(request.data.length === 1) {
                 console.log(`${request.data[0].name} logged in successfully.`);
+                props.login();
             } else {
                 console.log('The user or the password is incorrect.');
             }

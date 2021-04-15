@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles/App.css';
 import Header from './components/header';
 import Todos from './components/todos';
 import Login from './components/login-form';
 
-export default function App() {
-  const isLoggedIn = false;
-  const username = null;
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      username: null
+    };
+  }
 
-  return (
-    <div>
-      <Header />
-      <main>
-        {
-          (isLoggedIn)
-          ? <Todos />
-          : <Login />
-        }
-      </main>
-    </div>
-  );
+  login = () => {
+    this.setState({
+      isLoggedIn: true
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <main>
+          {
+            (this.state.isLoggedIn)
+            ? <Todos/>
+            : <Login login={this.login} />
+          }
+        </main>
+      </div>
+    );
+  }
 }
