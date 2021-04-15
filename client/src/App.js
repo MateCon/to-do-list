@@ -11,18 +11,25 @@ export default class App extends Component {
       isLoggedIn: false
     };
     this.header = React.createRef();
+    this.todos = React.createRef();
   }
 
-  login = username => {
+  login = (username, user_id) => {
     this.setState({
       isLoggedIn: true,
-      username: username
+      username: username,
+      user_id: user_id
     });
     this.updateHeader();
+    this.updateTodos();
   }
 
   updateHeader = () => {
     this.header.current.setState({name: this.state.username});
+  }
+
+  updateTodos = () => {
+    this.todos.current.setState({username: this.state.username, user_id: this.state.user_id});
   }
 
   render() {
@@ -35,7 +42,7 @@ export default class App extends Component {
         <main>
           {
             (this.state.isLoggedIn)
-            ? <Todos name={this.state.username}/>
+            ? <Todos ref={this.todos}/>
             : <Login login={this.login} />
           }
         </main>

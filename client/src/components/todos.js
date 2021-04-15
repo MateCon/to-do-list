@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import Todo from './todo';
 
 export default class Todos extends Component {
@@ -6,6 +7,8 @@ export default class Todos extends Component {
         super(props);
 
         this.state = {
+            username: null,
+            user_id: null,
             input: '',
             todos: [],
             whichCompleted: [],
@@ -16,13 +19,28 @@ export default class Todos extends Component {
         this.index = 0;
     }
 
+    uploadTask = index => {
+        Axios.post('http://localhost:3001/createTask', {
+            user_id: this.state.user_id,
+            content: this.state.todos[index],
+            is_completed: this.state.whichCompleted[index]
+        }).then(() => {
+            console.log('success');
+        });
+    }
+
+    loadTasks = () => {
+        
+    }
+
     addTask = event => {
         event.preventDefault();
         if(event.target[0].value === '') return ;
+        console.log(this.state);
         this.setState({
             whichCompleted: [...this.state.whichCompleted, false],
             todos: [...this.state.todos, event.target[0].value]
-        })
+        }, () => this.uploadTask(this.state.todos.length-1));
         event.target[0].value = '';
     }
 

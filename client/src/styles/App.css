@@ -19,7 +19,7 @@ body {
 }
 
 header {
-  padding: 7px;
+  padding: 7px 20px 7px 20px;
   background-color: rgba(12, 12, 12, 0.8);
   color: #f2f2f2;
 }

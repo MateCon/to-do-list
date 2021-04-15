@@ -27,7 +27,7 @@ export default function Todos(props) {
         }).then(request => {
             if(request.data.length === 1) {
                 console.log(`${request.data[0].name} logged in successfully.`);
-                props.login(request.data[0].name);
+                props.login(request.data[0].name, request.data[0].id);
             } else {
                 console.log('The user or the password is incorrect.');
             }
