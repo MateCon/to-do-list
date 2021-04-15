@@ -6,7 +6,6 @@ export default function Todos(props) {
     const [name, setName] = useState('');
     const [password, setPassword] = useState(0);
     const [confirmPassword, setConfirmPassword] = useState(0);
-    const [hasLoggedIn, setHasLoggedIn] = useState([]);
 
     const addUser = () => {
         if(password === confirmPassword) {
@@ -28,7 +27,7 @@ export default function Todos(props) {
         }).then(request => {
             if(request.data.length === 1) {
                 console.log(`${request.data[0].name} logged in successfully.`);
-                props.login();
+                props.login(request.data[0].name);
             } else {
                 console.log('The user or the password is incorrect.');
             }

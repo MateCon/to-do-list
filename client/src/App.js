@@ -8,25 +8,34 @@ export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isLoggedIn: false,
-      username: null
+      isLoggedIn: false
     };
+    this.header = React.createRef();
   }
 
-  login = () => {
+  login = username => {
     this.setState({
-      isLoggedIn: true
+      isLoggedIn: true,
+      username: username
     });
+    this.updateHeader();
+  }
+
+  updateHeader = () => {
+    this.header.current.setState({name: this.state.username});
   }
 
   render() {
     return (
       <div>
-        <Header />
+        {
+          <Header ref={this.header} />
+        }
+        
         <main>
           {
             (this.state.isLoggedIn)
-            ? <Todos/>
+            ? <Todos name={this.state.username}/>
             : <Login login={this.login} />
           }
         </main>

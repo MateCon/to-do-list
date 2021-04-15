@@ -21,8 +21,8 @@ export default class Todos extends Component {
         event.preventDefault();
         if(event.target[0].value === '') return ;
         this.setState({
-            whichCompleted: [... this.state.whichCompleted, false],
-            todos: [... this.state.todos, event.target[0].value]
+            whichCompleted: [...this.state.whichCompleted, false],
+            todos: [...this.state.todos, event.target[0].value]
         })
         event.target[0].value = '';
     }
@@ -57,8 +57,8 @@ export default class Todos extends Component {
     deleteTask = index => {
         this.setState({
             completed: this.state.completed - this.state.whichCompleted[index],
-            whichCompleted: [... this.state.whichCompleted.slice(0, index), ... this.state.whichCompleted.slice(index + 1, this.state.whichCompleted.length)],
-            todos: [... this.state.todos.slice(0, index), ... this.state.todos.slice(index + 1, this.state.todos.length)]
+            whichCompleted: [...this.state.whichCompleted.slice(0, index), ...this.state.whichCompleted.slice(index + 1, this.state.whichCompleted.length)],
+            todos: [...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1, this.state.todos.length)]
         });
     }
 
