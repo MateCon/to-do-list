@@ -139,3 +139,43 @@ header {
     text-decoration: line-through;
     color: #a9a9a9;
 }
+
+.login-form {
+    width: 400px;
+    max-width: 100%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba($black, 0.6);
+    border-radius: 5px;
+
+    h2 {
+        font-size: 2.2em;
+        text-shadow: 2px 2px $black;
+    }
+
+    p {
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        user-select: none;
+        &:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+
+    label {
+        color: $white;
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+    input {
+        padding: 5px;
+    }
+}

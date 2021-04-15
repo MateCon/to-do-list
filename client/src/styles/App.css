@@ -155,4 +155,55 @@ header {
   text-decoration: line-through;
   color: #a9a9a9;
 }
+
+.login-form {
+  width: 400px;
+  max-width: 100%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 40px 20px 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  background-color: rgba(12, 12, 12, 0.6);
+  border-radius: 5px;
+}
+
+.login-form h2 {
+  font-size: 2.2em;
+  text-shadow: 2px 2px #0c0c0c;
+}
+
+.login-form p {
+  margin-left: auto;
+  margin-right: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.login-form p:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-form label {
+  color: #f2f2f2;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.login-form input {
+  padding: 5px;
+}
 /*# sourceMappingURL=App.css.map */
