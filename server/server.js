@@ -60,6 +60,21 @@ app.post('/createTask', (req, res) => {
     })
 });
 
+app.post('/updateCompletion', (req, res) => {
+    const id = req.body.id;
+    const is_compleated = req.body.is_completed;
+    console.log(id, is_compleated);
+    db.query('UPDATE Task SET is_completed = ? WHERE id = ?',
+    [is_compleated, id],
+    (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+});
+
 app.post('/deleteTask', (req, res) => {
     const id = req.body.id;
 

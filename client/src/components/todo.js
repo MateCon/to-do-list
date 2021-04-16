@@ -5,26 +5,28 @@ export default class Todo extends Component {
         super(props);
 
         this.state = {
+            id: this.props.id,
             key: this.props.index,
             task: this.props.task,
-            isCompleted: this.props.isCompleted
+            is_completed: this.props.is_completed
         }
     }
 
     changeCompletion = () => {
+        this.props.updateCompletionInDB(this.state.id, !this.state.is_completed)
         this.setState({
-            isCompleted: !this.state.isCompleted
+            is_completed: !this.state.is_completed
         });
         this.props.changeCompletionInParent(this.state.key);
     }
 
     render() {
-        const willBeShown = ((this.props.filterType === 'all') || (this.props.filterType === 'completed' && this.state.isCompleted) || (this.props.filterType === 'active' && !this.state.isCompleted));
+        const willBeShown = ((this.props.filterType === 'all') || (this.props.filterType === 'completed' && this.state.is_completed) || (this.props.filterType === 'active' && !this.state.is_completed));
 
         const object = (<div className='task'>
-            <li className={(this.state.isCompleted) ? 'completed' : ''} onClick={() => {
+            <li className={(this.state.is_completed) ? 'completed' : ''} onClick={() => {
                 this.changeCompletion();
-                this.props.modifyCount(this.state.isCompleted);
+                this.props.modifyCount(this.state.is_completed);
             }}>
                 {this.state.task}
             </li>

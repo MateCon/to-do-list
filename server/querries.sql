@@ -6,6 +6,13 @@ SELECT * FROM ToDoList.Task;
 DROP TABLE ToDoList.User;
 DROP TABLE ToDoList.Task;
 
+UPDATE Task 
+SET is_completed = 1
+WHERE id = 14;
+
+SELECT * FROM ToDoList.User
+WHERE id = 14;
+
 CREATE TABLE User (
 	id int not null auto_increment,
     name varchar(255) not null,

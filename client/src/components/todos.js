@@ -22,7 +22,14 @@ export default class Todos extends Component {
         Axios.post('http://localhost:3001/createTask', {
             user_id: this.state.user_id,
             content: this.state.todos[index].content,
-            is_completed: this.state.todos[index].isCompleted
+            is_completed: this.state.todos[index].is_completed
+        });
+    }
+
+    updateCompletionInDB = (id, is_completed) => {
+        Axios.post('http://localhost:3001/updateCompletion', {
+            id: id,
+            is_completed: is_completed
         });
     }
 
@@ -40,7 +47,7 @@ export default class Todos extends Component {
         }).then(request => {
             this.setState({
                 todos: request.data
-            });
+            }, () => console.log(this.state));
         });
     }
 
@@ -50,19 +57,19 @@ export default class Todos extends Component {
         this.setState({
             todos: [...this.state.todos, {
                 content: event.target[0].value,
-                isCompleted: false
+                is_completed: false
             }]
         }, () => this.uploadTask(this.state.todos.length-1));
         event.target[0].value = '';
     }
 
     changeCompletionInParent = index => {
-        this.state.todos[index].whichCompleted = !this.state.todos[index].whichCompleted;
+        this.state.todos[index].is_completed = !this.state.todos[index].is_completed;
     }
 
-    modifyCount = isCompleted => {
+    modifyCount = is_completed => {
         this.setState({
-            completed: this.state.completed + (isCompleted ? -1 : 1)
+            completed: this.state.completed + (is_completed ? -1 : 1)
         })
     }
 
@@ -71,7 +78,7 @@ export default class Todos extends Component {
         for(let i = 0; i < this.state.todos.length; i++) {
             newTodos.push({
                 content: this.state.todos[i].content,
-                whichCompleted: bool
+                is_completed: bool
             });
         }
         this.setState({
@@ -127,12 +134,15 @@ export default class Todos extends Component {
                             this.index++;
                             return (<Todo task={task.content}
                                 key={this.index}
+                                id={task.id}
+                                is_completed={task.is_completed}
                                 index={i}
                                 modifyCount={this.modifyCount}
                                 filterType={this.state.filterType}
                                 deleteTask={this.deleteTask}
-                                isCompleted={task.whichCompleted}
-                                changeCompletionInParent={this.changeCompletionInParent}/>
+                                is_completed={task.is_completed}
+                                changeCompletionInParent={this.changeCompletionInParent}
+                                updateCompletionInDB={this.updateCompletionInDB}/>
                             );
                         })
                     }
