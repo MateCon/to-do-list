@@ -11,3 +11,6 @@ CREATE TABLE Task (
     primary key(id),
     foreign key(user_id) references User (id)
 );
+
+SELECT * FROM ToDoList.Task
+WHERE user_id=2;

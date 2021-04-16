@@ -61,6 +61,20 @@ app.post('/createTask', (req, res) => {
     })
 });
 
+app.post('/getTasks', (req, res) => {
+    const user_id = req.body.user_id;
+    
+    db.query('SELECT * FROM ToDoList.Task WHERE user_id=?',
+    [user_id],
+    (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+});
+
 app.listen(port, () => {
     console.log(`Your server is running on port ${port}.`)
 });

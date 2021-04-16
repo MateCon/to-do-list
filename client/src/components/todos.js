@@ -11,7 +11,6 @@ export default class Todos extends Component {
             user_id: null,
             input: '',
             todos: [],
-            whichCompleted: [],
             completed: 0,
             filterType: 'all'
         }
@@ -22,15 +21,21 @@ export default class Todos extends Component {
     uploadTask = index => {
         Axios.post('http://localhost:3001/createTask', {
             user_id: this.state.user_id,
-            content: this.state.todos[index],
-            is_completed: this.state.whichCompleted[index]
+            content: this.state.todos[index].content,
+            is_completed: this.state.todos[index].whichCompleted
         }).then(() => {
             console.log('success');
         });
     }
 
     loadTasks = () => {
-        
+        Axios.post('http://localhost:3001/getTasks', {
+            user_id: this.state.user_id
+        }).then(request => {
+            this.setState({
+                todos: request.data
+            });
+        });
     }
 
     addTask = event => {
@@ -38,14 +43,16 @@ export default class Todos extends Component {
         if(event.target[0].value === '') return ;
         console.log(this.state);
         this.setState({
-            whichCompleted: [...this.state.whichCompleted, false],
-            todos: [...this.state.todos, event.target[0].value]
+            todos: [...this.state.todos, {
+                content: event.target[0].value,
+                isCompleted: false
+            }]
         }, () => this.uploadTask(this.state.todos.length-1));
         event.target[0].value = '';
     }
 
     changeCompletionInParent = index => {
-        this.state.whichCompleted[index] = !this.state.whichCompleted[index];
+        this.state.todos[index].whichCompleted = !this.state.todos[index].whichCompleted;
     }
 
     modifyCount = isCompleted => {
@@ -55,13 +62,17 @@ export default class Todos extends Component {
     }
 
     modifyEveryThing = bool => {
-        let arr = [];
-        for(let i = 0; i < this.state.whichCompleted.length; i++) {
-            arr.push(bool);
+        let newTodos = [];
+        let count = 0;
+        for(let i = 0; i < this.state.todos.length; i++) {
+            newTodos.push({
+                content: this.state.todos[i].content,
+                whichCompleted: bool
+            });
         }
         this.setState({
-            whichCompleted: arr,
-            completed: (!bool) ? 0 : this.state.whichCompleted.length
+            todos: newTodos,
+            completed: (!bool) ? 0 : this.state.todos.length
         });
     }
 
@@ -72,24 +83,25 @@ export default class Todos extends Component {
     }
 
     deleteTask = index => {
+        console.log(this.state.todos[index]);
         this.setState({
-            completed: this.state.completed - this.state.whichCompleted[index],
-            whichCompleted: [...this.state.whichCompleted.slice(0, index), ...this.state.whichCompleted.slice(index + 1, this.state.whichCompleted.length)],
+            completed: this.state.completed - this.state.todos[index].is_completed,
             todos: [...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1, this.state.todos.length)]
         });
     }
 
     deleteCheckedItems = () => {
-        let newTodos = [], newWhichCompleted = [];
-        for(let i = 0; i < this.state.whichCompleted.length; i++) {
-            if(!this.state.whichCompleted[i]) {
-                newTodos.push(this.state.todos[i]);
-                newWhichCompleted.push(this.state.whichCompleted[i]);
+        let newTodos = [];
+        for(let i = 0; i < this.state.todos.length; i++) {
+            if(!this.state.todos[i].is_completed) {
+                newTodos.push({
+                    content: this.state.todos[i].content,
+                    whichCompleted: this.state.todos[i].is_completed
+                });
             }
         }
         this.setState({
             todos: newTodos,
-            whichCompleted: newWhichCompleted,
             completed: 0
         });
     }
@@ -117,13 +129,13 @@ export default class Todos extends Component {
                     {
                         this.state.todos.map((task, i) => {
                             this.index++;
-                            return (<Todo task={task}
+                            return (<Todo task={task.content}
                                 key={this.index}
                                 index={i}
                                 modifyCount={this.modifyCount}
                                 filterType={this.state.filterType}
                                 deleteTask={this.deleteTask}
-                                isCompleted={this.state.whichCompleted[i]}
+                                isCompleted={task.whichCompleted}
                                 changeCompletionInParent={this.changeCompletionInParent}/>
                             );
                         })
