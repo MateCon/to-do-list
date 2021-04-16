@@ -23,8 +23,14 @@ export default class Todos extends Component {
             user_id: this.state.user_id,
             content: this.state.todos[index].content,
             is_completed: this.state.todos[index].isCompleted
-        }).then(() => {
-            console.log('task created');
+        });
+    }
+
+    deleteTaskInDB = index => {
+        Axios.post('http://localhost:3001/deleteTask', {
+            id: this.state.todos[index].id
+        }).then(request => {
+            console.log('task deleted');
         });
     }
 
@@ -62,7 +68,6 @@ export default class Todos extends Component {
 
     modifyEveryThing = bool => {
         let newTodos = [];
-        let count = 0;
         for(let i = 0; i < this.state.todos.length; i++) {
             newTodos.push({
                 content: this.state.todos[i].content,
@@ -82,27 +87,19 @@ export default class Todos extends Component {
     }
 
     deleteTask = index => {
-        console.log(this.state.todos[index]);
         this.setState({
             completed: this.state.completed - this.state.todos[index].is_completed,
             todos: [...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1, this.state.todos.length)]
         });
+        this.deleteTaskInDB(index);
     }
 
     deleteCheckedItems = () => {
-        let newTodos = [];
         for(let i = 0; i < this.state.todos.length; i++) {
-            if(!this.state.todos[i].is_completed) {
-                newTodos.push({
-                    content: this.state.todos[i].content,
-                    whichCompleted: this.state.todos[i].is_completed
-                });
+            if(this.state.todos[i].is_completed) {
+                this.deleteTask(i);
             }
         }
-        this.setState({
-            todos: newTodos,
-            completed: 0
-        });
     }
 
     render() {

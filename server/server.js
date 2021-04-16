@@ -60,6 +60,20 @@ app.post('/createTask', (req, res) => {
     })
 });
 
+app.post('/deleteTask', (req, res) => {
+    const id = req.body.id;
+
+    console.log(id);
+    db.query(`DELETE FROM Task WHERE id=${id}`,
+    (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+});
+
 app.post('/getTasks', (req, res) => {
     const user_id = req.body.user_id;
     
