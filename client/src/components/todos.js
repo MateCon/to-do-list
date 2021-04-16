@@ -22,9 +22,9 @@ export default class Todos extends Component {
         Axios.post('http://localhost:3001/createTask', {
             user_id: this.state.user_id,
             content: this.state.todos[index].content,
-            is_completed: this.state.todos[index].whichCompleted
+            is_completed: this.state.todos[index].isCompleted
         }).then(() => {
-            console.log('success');
+            console.log('task created');
         });
     }
 
@@ -41,7 +41,6 @@ export default class Todos extends Component {
     addTask = event => {
         event.preventDefault();
         if(event.target[0].value === '') return ;
-        console.log(this.state);
         this.setState({
             todos: [...this.state.todos, {
                 content: event.target[0].value,

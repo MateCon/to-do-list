@@ -48,7 +48,6 @@ app.post('/createTask', (req, res) => {
     const user_id = req.body.user_id;
     const content = req.body.content;
     const is_compleated = req.body.is_completed;
-    console.log(user_id, content, is_compleated);
 
     db.query('INSERT INTO Task (user_id, content, is_completed) VALUES (?,?,?)',
     [user_id, content, is_compleated],
