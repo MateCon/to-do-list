@@ -31,7 +31,7 @@ export default class App extends Component {
   updateTodos = () => {
     this.todos.current.setState({
       username: this.state.username, 
-      user_id: this.state.user_id
+      user_id: this.state.user_id,
     }, () => this.todos.current.loadTasks());
   }
 
